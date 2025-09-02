@@ -1,7 +1,7 @@
 # VibeKit
 
 <div align="center">
-  <img src="assets/images/vibekit-logo-placeholder.svg" alt="VibeKit Logo" width="300" />
+  <img src="assets/images/vibekit-logo.png" alt="VibeKit Logo" width="300" />
 </div>
 
 <div align="center">

@@ -20,4 +20,9 @@ To add the VibeKit logo to display in the main README:
 
 The main README references: `assets/images/vibekit-logo.png`
 
-Simply replace this file with your actual logo and it will appear automatically!
+**To replace with your logo:**
+1. Save your logo as `vibekit-logo.png` in this directory
+2. The README will automatically display your logo
+3. Commit and push the changes to see it on GitHub
+
+**Current Status:** ✅ Ready for your VibeKit logo!

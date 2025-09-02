@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection - users can read/write their own data, admins can read all
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null && 
+        request.auth.token.admin == true;
+    }
+    
+    // Tasks collection - users can read/write their own tasks, admins can read all
+    match /tasks/{taskId} {
+      allow read, write: if request.auth != null && 
+        resource.data.ownerId == request.auth.uid;
+      allow create: if request.auth != null && 
+        request.resource.data.ownerId == request.auth.uid;
+      allow read: if request.auth != null && 
+        request.auth.token.admin == true;
+    }
+    
+    // Media collection - users can read/write their own media, admins can read all
+    match /media/{mediaId} {
+      allow read, write: if request.auth != null && 
+        resource.data.ownerId == request.auth.uid;
+      allow create: if request.auth != null && 
+        request.resource.data.ownerId == request.auth.uid;
+      allow read: if request.auth != null && 
+        request.auth.token.admin == true;
+    }
+    
+    // Admin-only collections
+    match /admin/{document=**} {
+      allow read, write: if request.auth != null && 
+        request.auth.token.admin == true;
+    }
+  }
+}

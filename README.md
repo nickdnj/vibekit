@@ -1,8 +1,10 @@
 # VibeKit
 
 <div align="center">
+  <img src="assets/images/vibekit-logo-placeholder.svg" alt="VibeKit Logo" width="300" />
+</div>
 
-![VibeKit Logo](https://github.com/user-attachments/assets/your-logo-asset-id)
+<div align="center">
 
 **Clone. Configure. Vibe.**
 

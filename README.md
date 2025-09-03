@@ -27,6 +27,42 @@ VibeKit is a **vibe coding platform** — a GitHub-hosted, Firebase-powered Flut
 
 Clone the repo, run the **configure CLI wizard**, and immediately begin building apps inside **Cursor IDE** with all backend services (Auth, Firestore, Storage, Functions, Hosting, Messaging) pre-wired and ready to go.
 
+### 🌟 The Origin Story
+
+VibeKit was born from a moment of clarity inspired by Andrej Karpathy's insights on coding with AI. After 30 years managing infrastructure in the EDA industry at Mentor Graphics, I realized something profound during retirement: **the barrier between idea and app had finally disappeared**.
+
+The perfect storm had arrived: AI-powered coding (Cursor), Firebase's mature backend-as-a-service, Flutter's cross-platform excellence, and Google Workspace integration. For the first time in computing history, you could go from "I have an idea" to "I have an app in the App Store" without thinking about servers, databases, authentication, or deployment pipelines.
+
+VibeKit embodies this realization — **frictionless creativity** where infrastructure becomes invisible and ideas become apps instantly.
+
+### 💰 The Cost Revolution
+
+Here's the game-changer: **if you're already a Google Workspace customer, your app infrastructure is essentially free**.
+
+Firebase services scale beautifully on the free tier for small to medium apps:
+- **Authentication**: 50,000+ users/month free
+- **Firestore**: 50,000 reads, 20,000 writes/day free  
+- **Storage**: 5GB free with 1GB/day transfer
+- **Functions**: 2M invocations/month free
+- **Hosting**: 10GB storage, 360MB/day transfer free
+
+Your total incremental costs to build and ship apps:
+- **Apple Developer Program**: $99/year (for iOS/TestFlight)
+- **Google Play Developer**: ~$25 one-time registration
+- **Cursor Pro**: ~$20/month (AI-powered coding)
+
+That's it. **Under $150/year** to experiment, build, and deploy production-grade apps with enterprise-level infrastructure. No servers to manage, no DevOps complexity, no infrastructure bills.
+
+### 🚀 The Vision
+
+VibeKit represents a fundamental shift in how we think about app development. This isn't just another template — it's a **creativity amplifier**.
+
+**Clone → Configure → Vibe.** 
+
+Anyone with an idea can get an app into TestFlight or the Play Store in hours, not weeks. Whether you're a solo developer with a side project, a retiree who wants to solve problems you care about, or a small team building client apps, VibeKit eliminates the friction between inspiration and implementation.
+
+We're lowering the barrier to entry for app creation to almost zero. Because the best ideas often come from unexpected places, and they shouldn't die waiting for infrastructure.
+
 ### 🎨 Perfect For
 
 - **Solo devs & teams** building multiple productivity/utility apps

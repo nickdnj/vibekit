@@ -1,0 +1,82 @@
+# .cursorrules
+# Cursor coding rules for VibeKit – The Vibe Coding Platform
+
+version: 1
+name: VibeKit Rules
+
+guidelines:
+  - Always assume Firebase is the backend (Auth, Firestore, Storage, Functions, Hosting).
+  - Never suggest building custom auth, DB, or server unless explicitly asked.
+  - Use Flutter + Dart for all client code (iOS, Android, Web).
+  - Use Riverpod for state management (no Provider, no BLoC unless specified).
+  - Maintain clean architecture:
+    - UI → State Providers → Repository → Service → Firebase SDK.
+  - For admin features:
+    - Use Firebase custom claims (`admin: true`) to gate access.
+    - Place admin UI under `/admin` route.
+  - For device features (camera, mic, location):
+    - Use Flutter plugins and wrap them in a `DeviceService`.
+  - For API/MCP integrations:
+    - Expose new functionality via Firebase Functions HTTPS endpoints.
+    - Default format: `/api/v1/<module>/<action>`.
+  - CI/CD:
+    - iOS → Fastlane + App Store Connect.
+    - Android → Gradle Play Publisher + Play Console.
+    - Web → Firebase Hosting.
+  - Repository Generation:
+    - VibeKit creates independent repositories, not modified templates.
+    - Each generated repo has its own identity, docs, and CI/CD.
+    - Reference `/docs` folder for project-specific context and requirements.
+
+file_conventions:
+  - All services in `lib/core/services/`.
+  - All repositories in `lib/core/repositories/`.
+  - All Riverpod providers in `lib/core/providers/`.
+  - Features in `lib/features/<feature_name>/`.
+  - Firebase config in `lib/firebase_options.dart`.
+  - Security rules in `firebase/firestore.rules` and `firebase/storage.rules`.
+  - Project documentation in `/docs/` folder (PRD.md, SAD.md, UXD.md, TEST.md).
+  - Platform-specific CI/CD in `.github/workflows/`.
+
+code_style:
+  - Follow Dart/Flutter effective style guide.
+  - Use `AsyncValue` for async state in Riverpod.
+  - Always prefer immutable data models.
+  - Use `freezed` and `json_serializable` for data classes.
+
+scaffolds:
+  - "Add CRUD feature" → generate:
+    - Firestore collection schema.
+    - Repository + Service.
+    - Riverpod provider.
+    - UI: list + detail + edit screens.
+  - "Add Auth" → generate sign-in/sign-up screen using Firebase Auth.
+  - "Add Admin" → generate admin dashboard gated by `admin` claim.
+  - "Add platform support" → generate platform-specific configurations and CI/CD.
+  - "Update docs" → modify project documentation in `/docs` folder to reflect changes.
+
+repository_context:
+  - When working in a VibeKit-generated repository, always:
+    - Check `/docs` folder for project-specific requirements and architecture.
+    - Reference PRD.md for feature requirements and user stories.
+    - Follow SAD.md for architectural patterns and technical decisions.
+    - Use UXD.md for user experience guidelines and design patterns.
+    - Implement TEST.md strategy for new features and changes.
+  - Generated repositories are independent projects with their own:
+    - Git history (starts clean, no VibeKit template commits).
+    - Documentation (tailored to the specific app being built).
+    - CI/CD workflows (only for selected platforms).
+    - Firebase project (dedicated to this app).
+
+platform_awareness:
+  - Only suggest features and configurations for platforms selected during generation.
+  - Web-only repos: Focus on responsive design and PWA capabilities.
+  - Mobile-only repos: Leverage device features and platform-specific UI patterns.
+  - Multi-platform repos: Ensure consistent UX across all selected platforms.
+
+restricted:
+  - Do not suggest non-Firebase backends.
+  - Do not implement state management other than Riverpod unless user overrides.
+  - Do not bypass Firebase security rules.
+  - Do not modify VibeKit template files when working in generated repositories.
+  - Do not suggest platform features for platforms not selected during generation.

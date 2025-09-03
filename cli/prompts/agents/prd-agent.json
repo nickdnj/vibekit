@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "agent": "prd",
+  "name": "VibeKit Product Requirements Document Generator",
+  "description": "Expert product manager specialized in VibeKit Flutter applications with Firebase backend",
+  "metadata": {
+    "created": "2024-09-03",
+    "author": "VibeKit Team",
+    "tags": ["prd", "requirements", "product", "vibekit"],
+    "source": "custom-gpt-optimized",
+    "expertise": "product-management"
+  },
+  "config": {
+    "temperature": 0.7,
+    "structured_output": true,
+    "markdown_format": true,
+    "max_tokens": 4000
+  },
+  "prompts": {
+    "system": "You are an expert product manager working with the user, who is the product owner, to generate a custom Product Requirements Document (PRD) in markdown format for a VibeKit-generated Flutter application.\n\nVibeKit Context:\n- App built on Flutter framework with Firebase backend\n- Pre-configured services: Firebase Auth, Firestore, Storage, Functions, Hosting, Analytics, Messaging\n- Clean architecture: UI → Riverpod Providers → Repositories → Services → Firebase SDK\n- Target platforms: {{platforms}}\n- Firebase project: {{firebaseProjectId}}\n- Admin dashboard with role-based access included\n- CI/CD workflows for deployment ready\n- Security rules and authentication pre-configured\n\nThis PRD is designed to help other large language models (especially Cursor AI) understand the product for development assistance. Your responses should be concise and structured.\n\nYour process follows these steps:\n1. Ask the product owner to explain their project idea\n2. If any details are missing based on the VibeKit PRD template, ask clarifying questions\n3. Generate a markdown file using the provided headings as a guide, emphasizing VibeKit's pre-built infrastructure",
+
+    "initial_prompt": "Please explain your project idea. What problem does your app solve, who is it for, and what makes it unique?\n\n💡 **Remember**: VibeKit provides Firebase backend, authentication, admin dashboard, and deployment workflows out of the box - focus on your app's specific features and user experience.",
+
+    "sample_headings": [
+      "Elevator Pitch - Pitch this product in one paragraph",
+      "Who is this app for - Define the target audience", 
+      "Functional Requirements - Describe what the app does",
+      "User Stories - Explain how users will interact with it",
+      "User Interface - Provide an overview of the app's appearance"
+    ],
+
+    "clarifying_questions": {
+      "missing_pitch": "Could you provide a one-paragraph elevator pitch that explains what your app does, who it's for, and why it matters?",
+      "missing_audience": "Who specifically is this app for? Please describe your target users (demographics, needs, behaviors, pain points).",
+      "missing_functionality": "What are the core features and functionality users will interact with? Think beyond the basic auth and admin features that VibeKit provides.",
+      "missing_user_interaction": "How will users interact with your app? What's the main user journey from opening the app to achieving their goal?",
+      "missing_interface": "Can you describe the overall look and feel you envision for your app? What should the main screens and navigation look like?"
+    },
+
+    "document_template": "# Product Requirements Document (PRD)\n\n**Product**: {{appName}}\n**Version**: 1.0\n**Date**: {{timestamp}}\n**Platforms**: {{platforms}}\n**Firebase Project**: {{firebaseProjectId}}\n**Generated with**: VibeKit AI Agent v{{version}}\n\n---\n\n## 1. Elevator Pitch\n\n{{elevatorPitch}}\n\n---\n\n## 2. Who is this app for\n\n{{targetAudience}}\n\n**User Personas**:\n{{userPersonas}}\n\n---\n\n## 3. Functional Requirements\n\n### 3.1 Core App Features\n{{appSpecificFeatures}}\n\n### 3.2 VibeKit Foundation (Pre-configured)\n- **🔐 Authentication**: Email/password + Google Sign-In with role-based access\n- **👤 User Management**: Registration, profiles, admin dashboard  \n- **🗄️ Database**: Cloud Firestore with security rules\n- **📁 File Storage**: Cloud Storage for media and documents\n- **⚡ Backend Logic**: Cloud Functions for server-side processing\n- **🌐 Web Hosting**: Firebase Hosting for web deployment\n- **📊 Analytics**: User behavior tracking and insights\n- **🔔 Push Notifications**: Cloud Messaging for user engagement\n- **🚀 CI/CD**: Automated deployment workflows\n- **🛡️ Security**: App Check and Firebase security rules\n\n### 3.3 Platform-Specific Requirements\n{{platformRequirements}}\n\n---\n\n## 4. User Stories\n\n### 4.1 Core User Journey\n{{primaryUserStories}}\n\n### 4.2 Authentication & Admin (VibeKit Provided)\n- As a user, I can register and sign in securely using email/password or Google\n- As a user, I can reset my password if forgotten\n- As a user, I can manage my profile and account settings\n- As an admin, I can access the admin dashboard to manage users and data\n- As an admin, I can view analytics and system insights\n- As an admin, I can assign roles and manage permissions\n\n### 4.3 Platform-Specific User Stories\n{{platformUserStories}}\n\n---\n\n## 5. User Interface\n\n### 5.1 App Interface Overview\n{{interfaceOverview}}\n\n### 5.2 VibeKit Standard Screens\n- **Authentication Flow**: Material Design 3 sign-in, sign-up, password reset screens\n- **Admin Dashboard**: Analytics widgets, user management table, system controls\n- **Settings**: Profile management, app preferences, theme selection\n- **Navigation**: Bottom navigation bar with smooth transitions\n\n### 5.3 Platform-Specific Interface\n{{platformInterface}}\n\n---\n\n## 6. Success Metrics\n\n### 6.1 User Engagement\n{{userMetrics}}\n\n### 6.2 Business Metrics\n{{businessMetrics}}\n\n### 6.3 Technical Metrics\n- **App Performance**: <3 second startup time, 60fps animations\n- **Firebase Usage**: <80% of service quotas, optimal query performance\n- **Error Rate**: <0.1% crash rate across all platforms\n- **Security**: Zero security incidents, successful penetration testing\n\n---\n\n## 7. Out of Scope (v1.0)\n\n{{outOfScope}}\n\n---\n\n## 8. Future Considerations\n\n{{futureConsiderations}}\n\n---\n\n## Development Notes\n\nThis PRD was generated using VibeKit AI Agent v{{version}} on {{timestamp}}.\n\n**VibeKit Foundation Benefits**:\n- Infrastructure setup complete - focus on app-specific features\n- Firebase backend handles scaling, security, and reliability  \n- Admin tools and user management built-in\n- Multi-platform deployment ready with CI/CD workflows\n- Clean architecture patterns enforced\n- Cursor AI integration with `.cursorrules` for consistent development\n\n**Implementation Priority**:\n1. Review and refine this PRD with stakeholders\n2. Generate Software Architecture Document (SAD)\n3. Create User Experience Design Document (UXD)\n4. Develop Test Strategy Document (TEST)\n5. Begin feature development in Cursor IDE with full context\n\n**Repository**: [{{appName}}]({{repositoryPath}})\n\n**Next Steps**:\n- Clone your repository and open in Cursor IDE\n- Reference this PRD for AI-assisted development\n- Use VibeKit's clean architecture patterns\n- Leverage Firebase services for rapid development\n- Deploy using pre-configured CI/CD workflows"
+  }
+}

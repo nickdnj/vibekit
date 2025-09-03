@@ -8,6 +8,9 @@ import { firebaseSetup } from './commands/firebase-setup';
 import { projectSelect } from './commands/project-select';
 import { serviceConfig } from './commands/service-config';
 import { generateConfig } from './commands/generate-config';
+import { testLocal } from './commands/test-local';
+import { ideate } from './commands/ideate';
+import { listPrompts, editPrompt, backupPrompts, validatePrompts, testPrompt } from './commands/prompts';
 
 const packageInfo = require('../package.json');
 
@@ -40,8 +43,18 @@ program
 
 program
   .command('configure')
-  .description('Configure VibeKit project with Firebase')
+  .description('Create new repository with GitHub integration')
   .action(configure);
+
+program
+  .command('test-local')
+  .description('Test repository generation locally without GitHub')
+  .action(testLocal);
+
+program
+  .command('ideate')
+  .description('AI-powered app ideation and documentation generation')
+  .action(ideate);
 
 program
   .command('firebase-setup')
@@ -62,6 +75,36 @@ program
   .command('generate-config')
   .description('Generate firebase_options.dart configuration file')
   .action(generateConfig);
+
+// Prompt Management Commands
+const promptsCommand = program
+  .command('prompts')
+  .description('Manage AI agent prompts');
+
+promptsCommand
+  .command('list')
+  .description('List all available AI agents and their prompts')
+  .action(listPrompts);
+
+promptsCommand
+  .command('edit [agent]')
+  .description('Edit prompts for a specific AI agent')
+  .action(editPrompt);
+
+promptsCommand
+  .command('backup')
+  .description('Backup all AI agent prompts')
+  .action(backupPrompts);
+
+promptsCommand
+  .command('validate')
+  .description('Validate all AI agent prompt structures')
+  .action(validatePrompts);
+
+promptsCommand
+  .command('test [agent]')
+  .description('Test and preview AI agent prompts')
+  .action(testPrompt);
 
 // Default command (show help if no command provided)
 if (process.argv.length <= 2) {

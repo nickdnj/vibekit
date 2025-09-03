@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "name": "VibeKit AI Agent Prompts",
+  "description": "Professional-grade prompts based on proven custom GPT patterns",
+  "agents": {
+    "prd": "agents/prd-agent.json",
+    "sad": "agents/sad-agent.json",
+    "uxd": "agents/uxd-agent.json",
+    "test": "agents/test-agent.json"
+  },
+  "settings": {
+    "auto_backup": true,
+    "prompt_validation": true,
+    "template_interpolation": true,
+    "structured_output": true
+  },
+  "metadata": {
+    "created": "2024-09-03",
+    "last_updated": "2024-09-03",
+    "backup_count": 5,
+    "source": "custom-gpt-optimized"
+  }
+}

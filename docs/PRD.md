@@ -6,7 +6,7 @@
 
 ## **1\. Elevator Pitch**
 
-VibeKit is a **vibe coding platform** — a GitHub-hosted, Firebase-powered Flutter template designed to let developers go from idea to app **without touching infrastructure**. Developers clone the repo, run a **configure CLI wizard**, and immediately begin building apps inside **Cursor IDE** with all backend services (Auth, Firestore, Storage, Functions, Hosting, Messaging) prewired.
+VibeKit is a **vibe coding platform** — a GitHub-hosted, Firebase-powered Flutter template designed to let developers go from idea to app **without touching infrastructure**. Developers clone the VibeKit template, run a **configure CLI wizard** that creates a **brand-new repository** with complete project independence, and immediately begin building apps inside **Cursor IDE** with all backend services (Auth, Firestore, Storage, Functions, Hosting, Messaging) prewired.
 
 By bundling **Cursor rules** for coding consistency and optional **MCP server integrations** (PDF, FFmpeg, Graphics, Firebase Admin, App Store Connect, Google Play), VibeKit transforms app development into a **creative flow**: developers describe features, and the environment scaffolds them instantly.
 
@@ -48,19 +48,27 @@ By bundling **Cursor rules** for coding consistency and optional **MCP server in
 
 ### **3.2 CLI Configure Wizard**
 
-* Collects: app name, bundle IDs, target platforms, branding options.
+* **Repository Creation**: Authenticates with GitHub and creates a new repository for the target app.
 
-* Connects to Firebase via `firebase login`.
+* **Platform Selection**: Prompts user to choose target platforms (Web, iOS, Android) and configures accordingly.
 
-* Provisions Firebase services: Auth, Firestore, Storage, Functions, Hosting, Messaging, Analytics.
+* **Identity Setup**: Collects app name, bundle IDs, branding options, and renames project files.
 
-* Runs **FlutterFire CLI** to generate `firebase_options.dart`.
+* **Firebase Integration**: Connects via `firebase login` and provisions selected services.
 
-* Deploys baseline Firestore/Storage rules.
+* **Service Configuration**: Enables Auth, Firestore, Storage, Functions, Hosting, Messaging, Analytics based on platform choices.
 
-* Seeds an admin account.
+* **Code Generation**: Runs **FlutterFire CLI** to generate `firebase_options.dart`.
 
-* Sets up CI/CD secrets (App Store, Play Store, Firebase).
+* **Security Setup**: Deploys baseline Firestore/Storage rules and seeds an admin account.
+
+* **Documentation**: Creates `/docs` folder with PRD, SAD, UXD, TEST templates.
+
+* **CI/CD Pipeline**: Sets up GitHub Actions workflows for selected platforms.
+
+* **Repository Push**: Initializes and pushes complete project to the new GitHub repository.
+
+**Output**: A fully independent repository ready for immediate development in Cursor IDE.
 
 ### **3.3 Cursor IDE Integration**
 
@@ -104,17 +112,21 @@ Together, these MCPs make vibe coding **“motherf**\*ing awesome”\*\* by remo
 
 ## **4\. User Stories**
 
-* **As a developer**, I can clone the repo, run `configure`, and have a ready-to-code Firebase app.
+* **As a developer**, I can clone VibeKit, run `configure`, and get a brand-new repository with a complete Firebase app ready for development.
 
-* **As a developer**, I can build new features in Cursor by describing them, with consistent Firebase-backed scaffolds.
+* **As a developer**, I can specify my target platforms (Web/iOS/Android) during configuration and get tailored CI/CD workflows.
 
-* **As an admin user**, I can log in to any app and use a built-in admin console for user/data management.
+* **As a developer**, I receive a repository with complete documentation (`/docs` folder) that Cursor can reference for consistent development.
 
-* **As a vibe coder**, I can extend the template by calling MCP servers (e.g., generate PDFs, process audio) without leaving Cursor.
+* **As a developer**, I can build new features in Cursor by describing them, with consistent Firebase-backed scaffolds guided by the included `.cursorrules`.
 
-* **As a CI engineer**, I can rely on prebuilt workflows to deploy apps to Firebase Hosting, App Store Connect, and Play Console.
+* **As an admin user**, I can log in to any VibeKit-generated app and use the built-in admin console for user/data management.
 
-* **As a product owner**, I know every app has consistent auth, security, and backend setup.
+* **As a vibe coder**, I can extend my app by integrating MCP servers (e.g., generate PDFs, process audio) without leaving Cursor.
+
+* **As a CI engineer**, I can rely on prebuilt GitHub Actions workflows that deploy to the platforms I selected during configuration.
+
+* **As a product owner**, I know every VibeKit-generated app has consistent auth, security, backend setup, and documentation structure.
 
 ---
 

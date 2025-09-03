@@ -6,21 +6,23 @@
 
 ## **1\. System Design**
 
-* **Purpose**: Provide a GitHub-hosted Flutter \+ Firebase template that developers can clone, configure via CLI, and use directly inside Cursor IDE for vibe coding.
+* **Purpose**: Provide a GitHub-hosted Flutter \+ Firebase template that developers can clone, configure via CLI to create independent repositories, and use directly inside Cursor IDE for vibe coding.
 
 * **Key Components**:
 
   * **Template Repo** (Flutter app, Firebase configs, CI/CD workflows, `.cursorrules`).
 
-  * **CLI Tool** (`platform configure`) for initial setup and Firebase provisioning.
+  * **CLI Tool** (`platform configure`) for GitHub authentication, repository creation, platform selection, and Firebase provisioning.
 
-  * **Cursor IDE Integration** for vibe coding flow.
+  * **Generated Repository** (Independent project with complete documentation, CI/CD, and platform-specific configurations).
+
+  * **Cursor IDE Integration** for vibe coding flow with included `.cursorrules` and `/docs` folder.
 
   * **Firebase Backend** (Auth, Firestore, Storage, Functions, Hosting, Messaging).
 
   * **MCP Servers** (Firebase Admin, Google Cloud, PDF, FFmpeg, Graphics, App Store Connect, Google Play).
 
-* **Deployment Model**: Per-client Firebase projects, App Store/Play Store listings.
+* **Deployment Model**: Per-app Firebase projects, independent GitHub repositories, platform-specific App Store/Play Store listings.
 
 ---
 
@@ -195,39 +197,67 @@
 
 ---
 
-## **11\. Cursor \+ MCP Workflow**
+## **11\. Repository Creation \+ Configuration Flow**
 
-* `.cursorrules` enforce:
+### **CLI Configuration Process**:
+
+1. **GitHub Authentication**: CLI authenticates with GitHub API for repository creation.
+
+2. **Platform Selection**: User chooses target platforms (Web, iOS, Android).
+
+3. **App Identity**: Collects app name, bundle IDs, branding preferences.
+
+4. **Repository Creation**: Creates new GitHub repository with chosen app name.
+
+5. **Firebase Setup**: Authenticates with Firebase and provisions selected services.
+
+6. **Code Generation**: Generates platform-specific configurations and `firebase_options.dart`.
+
+7. **Documentation**: Creates `/docs` folder with PRD, SAD, UXD, TEST templates.
+
+8. **CI/CD Setup**: Configures GitHub Actions workflows for selected platforms.
+
+9. **Repository Push**: Initializes git and pushes complete project to new repository.
+
+### **Cursor \+ MCP Workflow**:
+
+* `.cursorrules` and `/docs` folder provide context for:
 
   * Firebase-first backend usage.
 
-  * Riverpod for state.
+  * Riverpod for state management.
 
-  * Consistent service/repo architecture.
+  * Consistent service/repository architecture.
 
-* MCP Servers extend dev flow:
+  * Project-specific requirements and design decisions.
 
-  * Firebase Admin MCP: user/data ops.
+* MCP Servers extend development flow:
+
+  * Firebase Admin MCP: user/data operations.
 
   * PDF MCP: document features.
 
-  * FFmpeg MCP: audio/video snippets.
+  * FFmpeg MCP: audio/video processing.
 
-  * Graphics MCP: charts/avatars.
+  * Graphics MCP: charts/avatars generation.
 
-  * App Store MCPs: deployments.
+  * App Store MCPs: deployment automation.
 
-* Developer “vibes” ideas → Cursor scaffolds code → MCP servers handle external integrations.
+* Developer "vibes" ideas → Cursor scaffolds code using context → MCP servers handle external integrations.
 
 ---
 
 ## **12\. Success Criteria**
 
-* \<10 minutes from clone → configure → running app.
+* \<10 minutes from clone → configure → new repository with running app.
 
-* CI/CD pipelines work out of the box for Web/iOS/Android.
+* Generated repositories are completely independent with their own identity, docs, and CI/CD.
 
-* Cursor generates consistent, Firebase-compliant code.
+* Platform-specific CI/CD pipelines work out of the box for selected platforms.
 
-* MCP integrations available as optional power-ups.
+* Cursor generates consistent, Firebase-compliant code using `.cursorrules` and `/docs` context.
+
+* Every generated repository includes complete documentation for ongoing development.
+
+* MCP integrations available as optional power-ups for enhanced development workflow.
 

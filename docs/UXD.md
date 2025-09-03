@@ -16,25 +16,29 @@
 
 ### **Entry Point**
 
-* User finds **GitHub Repo** (public, well-documented).
+* User finds **VibeKit Template Repo** (public, well-documented).
 
-* README acts as **front door** → clear, friendly instructions: *“Clone, Configure, Vibe.”*
+* README acts as **front door** → clear, friendly instructions: *"Clone → Configure → New Repo → Vibe."*
 
 ### **Setup Flow**
 
-1. **Clone** → `git clone ...`
+1. **Clone Template** → `git clone https://github.com/nickdnj/vibekit.git`
 
-2. **Configure** → `platform configure`
+2. **Configure & Create** → `platform configure` (creates new repository)
 
-3. **Run** → `flutter run`
+3. **Switch to New Repo** → `cd ../my-new-app` (open in Cursor IDE)
 
-4. **Ship** → CI/CD pipelines push to Hosting / TestFlight / Play Store
+4. **Run** → `flutter run`
+
+5. **Ship** → CI/CD pipelines push to selected platforms
 
 ### **Daily Use**
 
-* Open repo in **Cursor IDE**.
+* Open **generated repository** in **Cursor IDE**.
 
-* Cursor guided by `.cursorrules` keeps dev “in vibe.”
+* Cursor guided by `.cursorrules` and `/docs` folder keeps dev "in vibe."
+
+* Reference PRD, SAD, UXD, TEST docs for project context.
 
 * Add features with natural prompts → consistent Firebase-backed scaffolds.
 
@@ -66,14 +70,18 @@
 
 ## **4\. Configure CLI (UX Flow)**
 
-**Step 1 — Identity**: App name, bundle IDs. Auto-renames project.  
- **Step 2 — Firebase Setup**: Google login, project selection, service provisioning, `firebase_options.dart`.  
- **Step 3 — Branding**: Colors, logo/icon → auto-generate splash \+ icons.  
- **Step 4 — Services**: Enable Auth providers, Firestore, Admin Dashboard, MCP modules.  
- **Step 5 — Admin User**: Seed first admin email.  
- **Step 6 — CI/CD**: Collect Apple/Google credentials → inject into GitHub Actions secrets.
+**Step 1 — GitHub Setup**: Authenticate with GitHub, choose repository name and visibility.  
+**Step 2 — Platform Selection**: Choose target platforms (Web, iOS, Android) with tailored configurations.  
+**Step 3 — App Identity**: App name, bundle IDs, display name. Auto-renames project files.  
+**Step 4 — Firebase Setup**: Google login, project selection, service provisioning based on platforms.  
+**Step 5 — Documentation**: Generate `/docs` folder with PRD, SAD, UXD, TEST templates.  
+**Step 6 — Branding**: Colors, logo/icon → auto-generate platform-specific assets.  
+**Step 7 — Services**: Enable Auth providers, Firestore, Admin Dashboard, platform-specific services.  
+**Step 8 — Admin User**: Seed first admin email for immediate access.  
+**Step 9 — CI/CD**: Configure GitHub Actions workflows for selected platforms.  
+**Step 10 — Repository**: Initialize git, push complete project to new GitHub repository.
 
-**Output**: Confirmation summary \+ next steps (run `flutter run`).
+**Output**: New independent repository URL \+ next steps (clone and run `flutter run`).
 
 ---
 
@@ -111,11 +119,15 @@
 
 ## **8\. Success Criteria**
 
-* **\<10 minutes** clone → configure → running app.
+* **\<10 minutes** clone template → configure → new repository with running app.
 
-* **CI/CD** works out-of-the-box for all platforms.
+* **Repository Independence**: Generated repos are completely self-contained with their own identity.
 
-* **Cursor** enforces architectural consistency.
+* **Platform Flexibility**: CI/CD works out-of-the-box for user-selected platforms only.
 
-* **MCP integrations** available with one command.
+* **Documentation Complete**: Every repo includes `/docs` folder with project context for Cursor.
+
+* **Cursor Optimization**: `.cursorrules` and documentation enable consistent architectural development.
+
+* **MCP integrations** available as optional enhancements for advanced workflows.
 

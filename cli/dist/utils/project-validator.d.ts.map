@@ -1,0 +1,1 @@
+{"version":3,"file":"project-validator.d.ts","sourceRoot":"","sources":["../../src/utils/project-validator.ts"],"names":[],"mappings":"AAGA;;GAEG;AACH,wBAAsB,mBAAmB,IAAI,OAAO,CAAC,OAAO,CAAC,CA6C5D;AAED;;GAEG;AACH,wBAAsB,cAAc,IAAI,OAAO,CAAC;IAAC,IAAI,EAAE,MAAM,CAAC;IAAC,WAAW,EAAE,MAAM,CAAA;CAAC,GAAG,IAAI,CAAC,CAoB1F"}

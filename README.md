@@ -38,27 +38,49 @@ Clone the repo, run the **configure CLI wizard**, and immediately begin building
 
 ## 🚀 Quick Start
 
+### ⚡ **Easy Mode: Interactive Setup (Recommended)**
+
+```bash
+# Clone and run the automated testing & setup script
+git clone https://github.com/nickdnj/vibekit.git
+cd vibekit
+./test-vibekit.sh
+```
+
+**The interactive script will:**
+- ✅ Check all prerequisites (Flutter, Node.js, Firebase CLI)
+- ✅ Build and install the VibeKit CLI automatically
+- ✅ Walk you through Firebase configuration step-by-step
+- ✅ Test every component and validate everything works
+- ✅ Get your app running on multiple platforms
+
+### 🛠️ **Manual Setup**
+
 Get your VibeKit app running in under 10 minutes:
 
-### 1. Clone & Setup
+### 1. Clone & Setup CLI
 ```bash
 git clone https://github.com/nickdnj/vibekit.git
 cd vibekit
+
+# Build the CLI
+cd cli && npm install && npm run build && cd ..
+```
+
+### 2. Configure Firebase
+```bash
+# Run the master configuration wizard
+node cli/dist/index.js configure
+```
+
+### 3. Setup Flutter & Run
+```bash
 flutter pub get
-```
+flutter packages pub run build_runner build
 
-### 2. Configure Firebase (Coming Soon)
-```bash
-# CLI wizard will guide you through Firebase setup
-npm install -g @vibekit/cli
-vibekit configure
-```
-
-### 3. Run Your App
-```bash
-flutter run -d chrome
-# or
-flutter run # for mobile
+# Run your app
+flutter run -d chrome --web-port 8080  # Web
+flutter run                           # Mobile (iOS/Android)
 ```
 
 ### 4. Start Vibing! 🎉

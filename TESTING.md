@@ -2,7 +2,34 @@
 
 ## 🚀 Complete Testing Instructions
 
-This guide will walk you through testing the **VibeKit CLI** from scratch on a new repository. Follow these steps to validate that everything works perfectly.
+This guide will walk you through testing the **VibeKit CLI** from scratch on a new repository. 
+
+## ⚡ **EASY MODE: Interactive Testing Script**
+
+**The fastest way to test everything:**
+
+```bash
+# Clone and run the interactive testing script
+git clone https://github.com/nickdnj/vibekit.git
+cd vibekit
+./test-vibekit.sh
+```
+
+**This script will:**
+- ✅ Check all prerequisites
+- ✅ Build the CLI automatically  
+- ✅ Walk you through each test step
+- ✅ Let you skip or run individual commands
+- ✅ Validate everything works correctly
+- ✅ Give you a complete summary
+
+**OR continue below for manual testing steps...**
+
+---
+
+## 📋 Manual Testing Instructions
+
+Follow these steps to validate that everything works perfectly.
 
 ## 📋 Prerequisites
 

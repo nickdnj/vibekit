@@ -23,6 +23,7 @@ class UserModel with _$UserModel {
 enum UserRole {
   user,
   admin,
+  inactive,
 }
 
 extension UserRoleExtension on UserRole {
@@ -32,6 +33,19 @@ extension UserRoleExtension on UserRole {
         return 'user';
       case UserRole.admin:
         return 'admin';
+      case UserRole.inactive:
+        return 'inactive';
+    }
+  }
+  
+  String get name {
+    switch (this) {
+      case UserRole.user:
+        return 'user';
+      case UserRole.admin:
+        return 'admin';
+      case UserRole.inactive:
+        return 'inactive';
     }
   }
 }
@@ -39,4 +53,16 @@ extension UserRoleExtension on UserRole {
 extension UserModelExtension on UserModel {
   bool get isAdmin => role == UserRole.admin.value;
   bool get isUser => role == UserRole.user.value;
+  bool get isInactive => role == UserRole.inactive.value;
+  
+  UserRole get userRole {
+    switch (role) {
+      case 'admin':
+        return UserRole.admin;
+      case 'inactive':
+        return UserRole.inactive;
+      default:
+        return UserRole.user;
+    }
+  }
 }

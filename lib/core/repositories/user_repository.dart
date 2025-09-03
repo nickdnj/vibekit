@@ -107,9 +107,9 @@ class UserRepository {
 
       return {
         'total': users.length,
-        'admins': users.where((u) => u.role == UserRole.admin).length,
-        'users': users.where((u) => u.role == UserRole.user).length,
-        'inactive': users.where((u) => u.role == UserRole.inactive).length,
+        'admins': users.where((u) => u.userRole == UserRole.admin).length,
+        'users': users.where((u) => u.userRole == UserRole.user).length,
+        'inactive': users.where((u) => u.userRole == UserRole.inactive).length,
       };
     } catch (e) {
       throw Exception('Failed to get user statistics: $e');

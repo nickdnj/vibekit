@@ -452,8 +452,8 @@ class _AdminScreenState extends ConsumerState<AdminScreen>
             DataCell(Text(user.email)),
             DataCell(
               Chip(
-                label: Text(user.role.name.toUpperCase()),
-                backgroundColor: _getRoleColor(user.role),
+                label: Text(user.userRole.name.toUpperCase()),
+                backgroundColor: _getRoleColor(user.userRole),
                 labelStyle: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -511,7 +511,7 @@ class _AdminScreenState extends ConsumerState<AdminScreen>
             _buildDetailRow('UID', user.uid),
             _buildDetailRow('Email', user.email),
             _buildDetailRow('Display Name', user.displayName ?? 'Not set'),
-            _buildDetailRow('Role', user.role.name.toUpperCase()),
+            _buildDetailRow('Role', user.userRole.name.toUpperCase()),
             _buildDetailRow(
               'Created',
               '${user.createdAt.day}/${user.createdAt.month}/${user.createdAt.year}',
@@ -592,7 +592,7 @@ class _ChangeRoleDialogState extends ConsumerState<_ChangeRoleDialog> {
   @override
   void initState() {
     super.initState();
-    _selectedRole = widget.user.role;
+    _selectedRole = widget.user.userRole;
   }
 
   @override
@@ -624,7 +624,7 @@ class _ChangeRoleDialogState extends ConsumerState<_ChangeRoleDialog> {
           child: const Text('Cancel'),
         ),
         ElevatedButton(
-          onPressed: isLoading || _selectedRole == widget.user.role
+          onPressed: isLoading || _selectedRole == widget.user.userRole
               ? null
               : _updateUserRole,
           child: isLoading

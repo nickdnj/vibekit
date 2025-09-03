@@ -78,6 +78,164 @@ check_command() {
     fi
 }
 
+# Install missing tools
+install_tool() {
+    local tool="$1"
+    
+    case $tool in
+        "node"|"npm")
+            echo -e "\n${CYAN}📦 Installing Node.js (includes npm)...${NC}"
+            echo -e "${YELLOW}Choose installation method:${NC}"
+            echo -e "${BLUE}1) Homebrew (recommended for macOS)${NC}"
+            echo -e "${BLUE}2) Download from nodejs.org${NC}"
+            echo -e "${BLUE}3) Skip installation${NC}"
+            
+            read -p "Enter choice (1-3): " node_choice
+            
+            case $node_choice in
+                1)
+                    if command -v brew &> /dev/null; then
+                        echo -e "${GREEN}Installing Node.js via Homebrew...${NC}"
+                        brew install node
+                    else
+                        echo -e "${YELLOW}Homebrew not found. Installing Homebrew first...${NC}"
+                        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+                        brew install node
+                    fi
+                    ;;
+                2)
+                    echo -e "${CYAN}Opening Node.js download page...${NC}"
+                    open "https://nodejs.org/en/download/"
+                    echo -e "${YELLOW}Please download and install Node.js, then run this script again.${NC}"
+                    exit 0
+                    ;;
+                3)
+                    print_warning "Skipping Node.js installation"
+                    return 1
+                    ;;
+            esac
+            ;;
+            
+        "flutter")
+            echo -e "\n${CYAN}📱 Installing Flutter...${NC}"
+            echo -e "${YELLOW}Choose installation method:${NC}"
+            echo -e "${BLUE}1) Automatic installation (recommended)${NC}"
+            echo -e "${BLUE}2) Manual download from flutter.dev${NC}"
+            echo -e "${BLUE}3) Skip installation${NC}"
+            
+            read -p "Enter choice (1-3): " flutter_choice
+            
+            case $flutter_choice in
+                1)
+                    echo -e "${GREEN}Installing Flutter automatically...${NC}"
+                    
+                    # Create flutter directory
+                    FLUTTER_DIR="$HOME/flutter"
+                    
+                    if [ -d "$FLUTTER_DIR" ]; then
+                        print_warning "Flutter directory already exists at $FLUTTER_DIR"
+                        echo -e "${YELLOW}Remove existing directory and reinstall? (y/n)${NC}"
+                        read -r remove_choice
+                        if [[ "$remove_choice" == "y" || "$remove_choice" == "Y" ]]; then
+                            rm -rf "$FLUTTER_DIR"
+                        else
+                            print_warning "Skipping Flutter installation"
+                            return 1
+                        fi
+                    fi
+                    
+                    # Clone Flutter
+                    echo -e "${CYAN}Cloning Flutter SDK...${NC}"
+                    git clone https://github.com/flutter/flutter.git -b stable "$FLUTTER_DIR"
+                    
+                    # Add to PATH
+                    echo -e "${CYAN}Adding Flutter to PATH...${NC}"
+                    
+                    # Detect shell and add to appropriate config file
+                    if [[ "$SHELL" == *"zsh"* ]]; then
+                        SHELL_CONFIG="$HOME/.zshrc"
+                    elif [[ "$SHELL" == *"bash"* ]]; then
+                        SHELL_CONFIG="$HOME/.bashrc"
+                    else
+                        SHELL_CONFIG="$HOME/.profile"
+                    fi
+                    
+                    # Add Flutter to PATH if not already there
+                    if ! grep -q "flutter/bin" "$SHELL_CONFIG" 2>/dev/null; then
+                        echo 'export PATH="$PATH:$HOME/flutter/bin"' >> "$SHELL_CONFIG"
+                        print_success "Added Flutter to PATH in $SHELL_CONFIG"
+                    fi
+                    
+                    # Update current session PATH
+                    export PATH="$PATH:$HOME/flutter/bin"
+                    
+                    print_success "Flutter installed! Running flutter doctor..."
+                    "$HOME/flutter/bin/flutter" doctor
+                    ;;
+                    
+                2)
+                    echo -e "${CYAN}Opening Flutter download page...${NC}"
+                    open "https://docs.flutter.dev/get-started/install"
+                    echo -e "${YELLOW}Please download and install Flutter, then run this script again.${NC}"
+                    exit 0
+                    ;;
+                3)
+                    print_warning "Skipping Flutter installation"
+                    return 1
+                    ;;
+            esac
+            ;;
+            
+        "git")
+            echo -e "\n${CYAN}📋 Installing Git...${NC}"
+            echo -e "${YELLOW}Choose installation method:${NC}"
+            echo -e "${BLUE}1) Homebrew (recommended for macOS)${NC}"
+            echo -e "${BLUE}2) Xcode Command Line Tools${NC}"
+            echo -e "${BLUE}3) Download from git-scm.com${NC}"
+            echo -e "${BLUE}4) Skip installation${NC}"
+            
+            read -p "Enter choice (1-4): " git_choice
+            
+            case $git_choice in
+                1)
+                    if command -v brew &> /dev/null; then
+                        echo -e "${GREEN}Installing Git via Homebrew...${NC}"
+                        brew install git
+                    else
+                        echo -e "${YELLOW}Homebrew not found. Installing Homebrew first...${NC}"
+                        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+                        brew install git
+                    fi
+                    ;;
+                2)
+                    echo -e "${GREEN}Installing Xcode Command Line Tools (includes Git)...${NC}"
+                    xcode-select --install
+                    ;;
+                3)
+                    echo -e "${CYAN}Opening Git download page...${NC}"
+                    open "https://git-scm.com/downloads"
+                    echo -e "${YELLOW}Please download and install Git, then run this script again.${NC}"
+                    exit 0
+                    ;;
+                4)
+                    print_warning "Skipping Git installation"
+                    return 1
+                    ;;
+            esac
+            ;;
+    esac
+    
+    # Verify installation
+    if command -v "$tool" &> /dev/null; then
+        print_success "$tool installation successful!"
+        return 0
+    else
+        print_error "$tool installation failed or not in PATH"
+        echo -e "${YELLOW}You may need to restart your terminal or run: source ~/.zshrc (or ~/.bashrc)${NC}"
+        return 1
+    fi
+}
+
 # Run command with user confirmation
 run_cli_command() {
     local cmd="$1"
@@ -136,30 +294,90 @@ main() {
     print_step "1.1" "Checking required tools"
     
     local missing_tools=()
+    local need_installation=false
     
+    # Check Node.js
     if ! check_command "node"; then
-        missing_tools+=("Node.js")
+        missing_tools+=("node")
+        need_installation=true
     fi
     
+    # npm comes with Node.js, but check separately
     if ! check_command "npm"; then
-        missing_tools+=("npm")
+        if ! echo "${missing_tools[@]}" | grep -q "node"; then
+            missing_tools+=("npm")
+            need_installation=true
+        fi
     fi
     
+    # Check Flutter
     if ! check_command "flutter"; then
-        missing_tools+=("Flutter")
+        missing_tools+=("flutter")
+        need_installation=true
     fi
     
+    # Check Git
     if ! check_command "git"; then
-        missing_tools+=("Git")
+        missing_tools+=("git")
+        need_installation=true
     fi
     
-    if [ ${#missing_tools[@]} -ne 0 ]; then
-        print_error "Missing tools: ${missing_tools[*]}"
-        echo -e "${YELLOW}Please install missing tools and run this script again.${NC}"
-        exit 1
+    # Handle missing tools
+    if [ "$need_installation" = true ]; then
+        echo -e "\n${YELLOW}${WARNING} Some required tools are missing!${NC}"
+        echo -e "${BLUE}Would you like me to help install them? (y/n)${NC}"
+        read -r install_choice
+        
+        if [[ "$install_choice" == "y" || "$install_choice" == "Y" ]]; then
+            for tool in "${missing_tools[@]}"; do
+                echo -e "\n${PURPLE}Installing $tool...${NC}"
+                if install_tool "$tool"; then
+                    print_success "$tool installed successfully!"
+                else
+                    print_warning "$tool installation was skipped or failed"
+                fi
+            done
+            
+            # Re-check after installation
+            echo -e "\n${CYAN}Re-checking tools after installation...${NC}"
+            local still_missing=()
+            
+            if ! check_command "node"; then
+                still_missing+=("Node.js")
+            fi
+            
+            if ! check_command "npm"; then
+                still_missing+=("npm")
+            fi
+            
+            if ! check_command "flutter"; then
+                still_missing+=("Flutter")
+            fi
+            
+            if ! check_command "git"; then
+                still_missing+=("Git")
+            fi
+            
+            if [ ${#still_missing[@]} -ne 0 ]; then
+                print_error "Still missing: ${still_missing[*]}"
+                echo -e "${YELLOW}You may need to:${NC}"
+                echo -e "${YELLOW}  • Restart your terminal${NC}"
+                echo -e "${YELLOW}  • Run: source ~/.zshrc (or ~/.bashrc)${NC}"
+                echo -e "${YELLOW}  • Install manually and run this script again${NC}"
+                echo -e "\n${BLUE}Continue anyway? (y/n)${NC}"
+                read -r continue_choice
+                if [[ "$continue_choice" != "y" && "$continue_choice" != "Y" ]]; then
+                    exit 1
+                fi
+            fi
+        else
+            print_error "Missing tools: ${missing_tools[*]}"
+            echo -e "${YELLOW}Please install missing tools and run this script again.${NC}"
+            exit 1
+        fi
     fi
     
-    print_success "All required tools are installed!"
+    print_success "All required tools are available!"
     wait_for_user
     
     # ================================================================
